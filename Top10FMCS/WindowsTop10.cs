@@ -49,11 +49,16 @@ namespace Top10FMCS
             List<string> votes = GetListFromFile("votes.txt");
             List<string> songs = GetListFromFile("songs.txt");
             List<int> top10 = CountTop10(votes, songs);
-            for(int i = 0; i < songs.Count; i++)
+            string[] songsMas = songs.ToArray();
+            int[] top10Mas = top10.ToArray();
+            Array.Sort(top10Mas, songsMas);
+            Array.Reverse(top10Mas);
+            Array.Reverse(songsMas);
+            for (int i = 0; i < songsMas.Length; i++)
             {
                 //listViewTop10.Items.Add(s);
-                ListViewItem data = new ListViewItem(songs[i]);
-                data.SubItems.Add(top10[i].ToString());
+                ListViewItem data = new ListViewItem(songsMas[i]);
+                data.SubItems.Add(top10Mas[i].ToString());
                 listViewTop10.Items.Add(data);
             }
             
